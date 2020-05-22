@@ -1,0 +1,29 @@
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('../images/maxresdefault.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.intro{
+	color: #828282;
+	height: 180px;
+	margin-top: auto;
+	margin-bottom: inherit;
+	display: none;
+}
+
+.btn-info{
+	align-content: center;
+}
+
+

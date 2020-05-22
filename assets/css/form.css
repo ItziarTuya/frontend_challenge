@@ -1,0 +1,36 @@
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+
+.card {
+    width: 30rem;
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.card-body #description{
+    resize:none;
+}
+
+
+.card-body .btn[value="Continuar"] {
+    color: white;
+    background-color: #FF7300;
+    width: 100px;
+}
+
+.card-body .btn[value="Continuar"]:hover {
+    background-color: #de6501;
+}
+
+.card-footer{
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.bg-habitissimo{
+    background-color: #de6501 !important;
+}
