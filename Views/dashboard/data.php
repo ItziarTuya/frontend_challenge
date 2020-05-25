@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="name">Nombre</label>
                         <input type="text" id="name" class="form-control" placeholder="Introduzca su nombre" required 
-                                <?php if (isset($this->name)) echo $this->name; ?> />
+                               <?php if (isset($this->name)) echo $this->name; ?> />
 
                     </div>
 
@@ -38,10 +38,12 @@
                                <?php if (isset($this->email)) echo trim($this->email); ?> />
                     </div>
 
+                    <?php if (isset($this->alert)) echo $this->alert; ?>
+
                     <div class="form-group">
                         <label for="phone">Teléfono</label>
                         <input type="text" id="phone" class="form-control" placeholder="Introduzca su teléfono" required 
-                            <?php if (isset($this->phone)) echo trim($this->phone); ?> />
+                               <?php if (isset($this->phone)) echo trim($this->phone); ?> />
                     </div>
 
                     <div class="form-group">

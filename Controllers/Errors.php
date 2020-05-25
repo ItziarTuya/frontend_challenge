@@ -1,13 +1,14 @@
-<?php 
+<?php
 
 class Errors extends Controller {
 
-	function __construct(){
-		parent::__construct();
-	}
+    function __construct() {
+        parent::__construct();
+    }
 
-	function index(){
-		$this->view->msg = 'This page doesnt exist';
-		$this->view->render('errors/index');
-	}
+    function index() {
+        require 'Views/errors/head.php';
+        $this->view->render('errors/error_404', true);
+    }
+
 }

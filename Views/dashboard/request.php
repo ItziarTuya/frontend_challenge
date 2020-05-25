@@ -25,11 +25,10 @@
 
             <div class="row pt-3">
                 <div class="col-sm-12">
-
+                    
                     <div class="form-group">
                         <label for="description">Descripción del trabajo</label>
-                        <textarea class="form-control" id="description" rows="3"  name="description" required>
-                            <?php
+                        <textarea class="form-control" id="description" rows="3"  name="description" required><?php
                                 if (isset($this->description)) echo trim($this->description);
                             ?>
                         </textarea>

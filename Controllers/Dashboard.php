@@ -24,52 +24,71 @@ class Dashboard extends Controller {
 
     public function backToStep1() {
 
-        $this->setDetails();
+        $this->setSessionDetails();
         $this->view->description = Session::get('description');
         $this->view->time = Session::get('time');
         $this->view->render('dashboard/request', true);
     }
 
     function loadDataView() {
-        
-        Session::set('category', filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING));
-        Session::set('subcategory', filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING));
-        Session::set('rate', filter_input(INPUT_POST, 'rate', FILTER_SANITIZE_STRING));
+
+        $this->setSessionDetails();
         
         //prepare data view
-        if (isset($_SESSION['step3']) && !empty($_SESSION['step3'])) {
-        
-            $this->view->name = empty(Session::get('name')) ? '' : 'value="' . Session::get('name') . '"';
-            $this->view->email = empty(Session::get('email')) ? '' : 'value="' . Session::get('email') . '"';
-            $this->view->phone = empty(Session::get('phone')) ? '' : 'value="' . Session::get('phone') . '"';
-        }
-        
-        $this->view->render('dashboard/data', true);
-    }   
-    
-    
-    
-    public function backToStep2() {
-        
-        Session::set('name', filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
-        Session::set('email', filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
-        Session::set('phone', filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
-        Session::set('step3', true);
+        $this->getSessionData();
 
-        $this->view->category = Session::get('category');
-        $this->view->subcategory = Session::get('subcategory');
-        $this->view->rate = Session::get('rate');
-        
+        $this->view->render('dashboard/data', true);
+    }
+
+    public function backToStep2() {
+
+        $this->setSessionData();
+
+        //prepare details view
+        $this->getSessionDetails();
         $categories = $this->lib->getCategories();
 
         $this->view->options = $categories;
         $this->view->render('dashboard/details', true);
     }
-    
-    public function setDetails() {
+
+    function finishMail() {
+
+        $this->setSessionData();
         
+        if (preg_match('/(.*)@(hotmail)\.(.*)/', Session::get('email') ) != false) {
+            $this->view->alert = '<div class="alert alert-danger" role="alert">Introduzca otro dominio que no sea hotmail</div>';
+            $this->loadDataView();
+        }
+    }
+
+    public function setSessionDetails() {
+
         Session::set('category', filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING));
         Session::set('subcategory', filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING));
         Session::set('rate', filter_input(INPUT_POST, 'rate', FILTER_SANITIZE_STRING));
     }
+    
+    public function getSessionDetails() {
+        
+        $this->view->category = Session::get('category');
+        $this->view->subcategory = Session::get('subcategory');
+        $this->view->rate = Session::get('rate');
+    }
+    
+    public function setSessionData() {
+        
+        Session::set('name', filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+        Session::set('email', filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
+        Session::set('phone', filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
+    }
+    
+    public function getSessionData() {
+        
+        $this->view->name =  'value="' . Session::get('name') . '"';
+        $this->view->email = 'value="' . Session::get('email') . '"';
+        $this->view->phone =  'value="' . Session::get('phone') . '"';
+    }
+    
+
 }
