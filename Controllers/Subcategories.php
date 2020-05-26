@@ -5,21 +5,19 @@ class Subcategories extends Controller {
     function __contruct() {
         parent::__construct();
     }
-    
-    function getSubcategories(){
-        
-        //$SESSION['category'] = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
+
+    function getSubcategories() {
+
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-        
+
         $subcategories = $this->model->getSubcategories($id);
-        
+
         $options = array();
         foreach ($subcategories as $subcategory) {
-            $options[$subcategory['id']] = $subcategory['name'];
+            $options[$subcategory['id']] = ucfirst($subcategory['name']);
         }
-        
-        echo json_encode( $options );
-        
+
+        echo json_encode($options);
     }
-    
+
 }

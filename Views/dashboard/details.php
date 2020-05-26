@@ -26,10 +26,10 @@
             <div class="row pt-3">
                 <div class="col-sm-12">
 
-
                     <div class="form-group">
                         <label for="categories">Categoría</label>
                         <select class="form-control" id="category" required>
+                            <!--<option>Selecciona una categoría</option>-->
                             <?php
                             for ($i = 0; $i < count($this->options); $i++) {
 
@@ -37,13 +37,15 @@
                             }
                             ?>
                         </select>
+                        <p class="category-error font-italic"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="subcategories">Subcategoría</label>
                         <select class="form-control" id="subcategory" readonly requiered>
-                            <option>Seleccione una categoría</option>
+                            <option value="0">Selecciona primero una categoría</option>
                         </select>
+                        <p class="subcategory-error font-italic"></p>
                     </div>
 
                     <div class="form-group">

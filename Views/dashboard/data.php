@@ -22,7 +22,7 @@
     <div class="card-body">
         <div class="container">
 
-            <div class="row pt-3">
+            <div class="form-row pt-3">
                 <div class="col-sm-12">
 
                     <div class="form-group">
@@ -36,9 +36,10 @@
                         <label for="email">E-mail</label>
                         <input type="text" id="email" class="form-control" placeholder="Introduzca su e-mail" required
                                <?php if (isset($this->email)) echo trim($this->email); ?> />
+                        <p class="email-error font-italic text-danger"><?php if (isset($this->error)) echo $this->error; ?></p>
                     </div>
 
-                    <?php if (isset($this->alert)) echo $this->alert; ?>
+                    
 
                     <div class="form-group">
                         <label for="phone">Teléfono</label>

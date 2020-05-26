@@ -31,7 +31,6 @@
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         
         <script type="text/javascript" charset="utf-8" src="../assets/js/dashboard/default.js"></script>
-        <script type="text/javascript" charset="utf-8" src="../assets/js/dashboard/validator.js"></script>
 	
     </head>
     <body>

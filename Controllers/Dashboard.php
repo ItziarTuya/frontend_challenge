@@ -12,15 +12,21 @@ class Dashboard extends Controller {
 
     public function loadDetailsView() {
 
-        Session::set("description", filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
-        Session::set("time", filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING));
-
-        //prepare details view
+        $this->setSessionRequest();
         $categories = $this->lib->getCategories();
-
         $this->view->options = $categories;
         $this->view->render('dashboard/details', true);
     }
+
+//    function getCategories() {
+//        $categories = $this->lib->getCategories();
+//        $options = array();
+//        foreach ($categories as $category) {
+//            $options[$category['id']] = $category['name'];
+//        }
+//
+//        echo json_encode($options);
+//    }
 
     public function backToStep1() {
 
@@ -33,7 +39,7 @@ class Dashboard extends Controller {
     function loadDataView() {
 
         $this->setSessionDetails();
-        
+
         //prepare data view
         $this->getSessionData();
 
@@ -55,11 +61,19 @@ class Dashboard extends Controller {
     function finishMail() {
 
         $this->setSessionData();
-        
-        if (preg_match('/(.*)@(hotmail)\.(.*)/', Session::get('email') ) != false) {
-            $this->view->alert = '<div class="alert alert-danger" role="alert">Introduzca otro dominio que no sea hotmail</div>';
+
+        if (preg_match('/(.*)@(hotmail)\.(.*)/', Session::get('email')) != false) {
+            $this->view->error = 'Introduce otro dominio que no sea hotmail';
             $this->loadDataView();
         }
+    }
+
+    //Session records:
+
+    public function setSessionRequest() {
+
+        Session::set("description", filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
+        Session::set("time", filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING));
     }
 
     public function setSessionDetails() {
@@ -68,27 +82,26 @@ class Dashboard extends Controller {
         Session::set('subcategory', filter_input(INPUT_POST, 'subcategory', FILTER_SANITIZE_STRING));
         Session::set('rate', filter_input(INPUT_POST, 'rate', FILTER_SANITIZE_STRING));
     }
-    
+
     public function getSessionDetails() {
-        
+
         $this->view->category = Session::get('category');
         $this->view->subcategory = Session::get('subcategory');
         $this->view->rate = Session::get('rate');
     }
-    
+
     public function setSessionData() {
-        
+
         Session::set('name', filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
         Session::set('email', filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING));
         Session::set('phone', filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
     }
-    
+
     public function getSessionData() {
-        
-        $this->view->name =  'value="' . Session::get('name') . '"';
+
+        $this->view->name = 'value="' . Session::get('name') . '"';
         $this->view->email = 'value="' . Session::get('email') . '"';
-        $this->view->phone =  'value="' . Session::get('phone') . '"';
+        $this->view->phone = 'value="' . Session::get('phone') . '"';
     }
-    
 
 }
