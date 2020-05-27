@@ -1,42 +1,41 @@
 $(function () {
 
-
-
-
     var url = 'http://localhost/habitissimo/';
     var category = '';
     var subcategory = '';
     var rate = '';
-    //descriptionFocus();
+    var name = '';
+    var email = '';
+    var phone = '';
 
-
-    function descriptionFocus() {
-        $('#description').focus();
-    }
-
+    // description error handler
+    $(document).on('focusout', '#description', function (event) {
+        description = $('#description').val();
+        if (description === "") {
+            showError('.description-error', '#description');
+        } else {
+            hideError('.description-error', '#description');
+        }
+    });
 
     // continue to step 2 btn handler
     $(document).on('click', '.continue-to-step-2', function (event) {
         description = $('#description').val();
-
         if (description === "") {
             event.preventDefault();
-            $('.description-error').append('Completa este campo').css('color', 'red');
-            $('#description').css('border', '1px solid red');
+            showError('.description-error', '#description');
         } else {
             loadStep2();
         }
     });
 
     function loadStep2() {
-        data = {
-            description: description,
-            time: $('#time').val()
-        };
-
         $.ajax({
             type: "POST",
-            data: data,
+            data: {
+                description: description,
+                time: $('#time').val()
+            },
             url: url + 'dashboard/loadDetailsView',
             success: function (response) {
 
@@ -44,7 +43,6 @@ $(function () {
 
                 if (category !== '')
                     getSubcategoriesBack(category, subcategory, rate, true);
-
             },
             error: function () {
                 alert('Something went wrong!');
@@ -52,33 +50,9 @@ $(function () {
         });
     }
 
-//    function getCategories() {
-//
-//        $.get(url + 'dashboard/getCategories', function (categories) {
-//            
-//            var select = $('#category');
-//            var options = select.prop('options');
-//
-//            $('option', select).remove();
-//
-//            $.each(JSON.parse(categories), function (val, text) {
-//                options[options.length] = new Option(text, val);
-//            });
-//            
-//            $(select).trigger('click');
-//        });
-//
-//    }
-    
-//    $(document).one('click', '#category', function(event){
-////        console.log({event});
-////        event.preventDefault();
-////        event.stopPropagation();
-//        getCategories();
-//    });
-
     // details view - categories handler for subcategories
     $(document).on('change', '#category', function (event) {
+        hideError('.category-error', '#category');
         var id = $(this).val();
         getSubcategoriesBack(id);
     });
@@ -113,26 +87,27 @@ $(function () {
         });
     }
 
+    // subcategory error handler
+    $(document).on('change', '#subcategory', function () {
+        hideError('.subcategory-error', '#subcategory');
+    });
+
     // back to step 1 btn handler
-
     $(document).on('click', '.back-to-step-1', function () {
-
         category = $('#category').val();
         subcategory = $('#subcategory').val();
         rate = $('#rate').val();
-        var data = {
-            'category': category,
-            'subcategory': subcategory,
-            'rate': rate
-        };
+        
         $.ajax({
             type: 'POST',
-            data: data,
+            data: {
+                category: category,
+                subcategory : subcategory,
+                rate : rate
+            },
             url: url + 'dashboard/backToStep1',
             success: function (response) {
-
                 $('.budget').empty().html(response);
-                descriptionFocus();
             },
             error: function () {
                 alert('Something went wrong!');
@@ -143,34 +118,29 @@ $(function () {
 
     // continue to step 3 btn handler
     $(document).on('click', '.continue-to-step-3', function (event) {
-        
         category = $('#category').val();
         subcategory = $('#subcategory').val();
         rate = $('#rate').val();
-        
-        
-        if ( category === '0' ){
+
+        if (category === '0') {
             showError('.category-error', '#category', 'Selecciona una opción');
             return false;
-        } else if ( subcategory === '0' ){
+        } else if (subcategory === '0') {
             showError('.subcategory-error', '#subcategory', 'Selecciona una opción');
             return false;
         }
-        
-        var data = {
-            'category': category,
-            'subcategory': subcategory,
-            'rate': rate
-        };
 
         $.ajax({
             type: "POST",
-            data: data,
+            data: {
+                category: category,
+                subcategory: subcategory,
+                rate: rate
+            },
             url: url + 'dashboard/loadDataView',
             success: function (response) {
-
                 $('.budget').empty().html(response);
-
+                if ($('input').lengh) toggleInputError();
             },
             error: function () {
                 alert('Something went wrong!');
@@ -180,20 +150,17 @@ $(function () {
 
     // back to step 2 btn handler
     $(document).on('click', '.back-to-step-2', function () {
-
         name = $('#name').val().trim();
         email = $('#email').val().trim();
         phone = $('#phone').val().trim();
 
-        var data = {
-            name: name,
-            email: email,
-            phone: phone
-        };
-
         $.ajax({
             type: 'POST',
-            data: data,
+            data: {
+                name: name,
+                email: email,
+                phone: phone
+            },
             url: url + 'dashboard/backToStep2',
             success: function (response) {
 
@@ -205,32 +172,69 @@ $(function () {
             }
         });
     });
-
-    //finish btn handler
-    $(document).on('click', '.finish', function () {
-
-        $.ajax({
-            type: 'POST',
-            data: {
-                name: $('#name').val().trim(),
-                email: $('#email').val().trim(),
-                phone: $('#phone').val().trim()
-            },
-            url: url + 'dashboard/finishMail',
-            success: function (response) {
-                $('.budget').empty().html(response);
-                if ( $('.email-error').text() ) $('#email').css('border', '1px solid red');
-            },
-            error: function () {
-                alert('Something went wrong!');
+    
+    // Data error handler
+    function toggleInputError(){
+        $(document).on('focusout', 'input', function(){
+            id_name = '#'+$(this).prop('id');
+            class_name = '.'+$(this).prop('id');
+            input_val = $(id_name).val();
+            if ( input_val === ''){
+                showError(class_name+'-error', id_name);
+            }else{
+                hideError(class_name+'-error', id_name);
             }
         });
+    }
+
+    //finish btn handler
+    $(document).on('click', '.finish', function (event) {
+        name = $('#name').val().trim();
+        email = $('#email').val().trim();
+        phone = $('#phone').val().trim();
+
+        if (name === '') {
+            showError('.name-error', '#name');
+            return false;
+        } else if (phone === '') {
+            showError('.phone-error', '#phone');
+            return false;
+        } else {
+            $.ajax({
+                type: 'POST',
+                data: {
+                    name: name,
+                    email: email,
+                    phone: phone
+                },
+                url: url + 'dashboard/finishMail',
+                success: function (response) {
+                    $('.budget').empty().html(response);
+                    if ($('.email-error').text())
+                        $('#email').css('border', '1px solid red');
+                },
+                error: function () {
+                    alert('Something went wrong!');
+                }
+            });
+        }
     });
     
-    function showError( p, element, error){
-        $(p).empty().append(error).css('color', 'red');
+
+    
+    function showError(p, element, error = 'Completa este campo') {
+        $(p).empty().append(error).css({'color': 'red', 'font-style': 'italic'});
         $(element).css('border', '1px solid red');
-    };
+    }
+
+    function hideError(p, element) {
+        $(p).empty();
+        $(element).css('border', '');
+    }
+
+    function dataParams() {
+        
+    }
 
 });
 

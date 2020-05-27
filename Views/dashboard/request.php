@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="description">Descripción del trabajo</label>
                         <textarea class="form-control" id="description" rows="3"  name="description" required><?php if (isset($this->description)) echo trim($this->description); ?></textarea>
-                        <p class="description-error font-italic"></p>
+                        <p class="description-error"></p>
                     </div>
 
                     <div class="form-group">

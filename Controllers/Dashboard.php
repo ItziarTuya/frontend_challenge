@@ -65,6 +65,9 @@ class Dashboard extends Controller {
         if (preg_match('/(.*)@(hotmail)\.(.*)/', Session::get('email')) != false) {
             $this->view->error = 'Introduce otro dominio que no sea hotmail';
             $this->loadDataView();
+        } else {
+            $this->view->name = Session::get('name');
+            $this->view->render('dashboard/finish', true);
         }
     }
 
