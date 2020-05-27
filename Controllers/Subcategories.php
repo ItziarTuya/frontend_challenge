@@ -7,7 +7,6 @@ class Subcategories extends Controller {
     }
 
     function getSubcategories() {
-
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
         $subcategories = $this->model->getSubcategories($id);
@@ -16,7 +15,6 @@ class Subcategories extends Controller {
         foreach ($subcategories as $subcategory) {
             $options[$subcategory['id']] = ucfirst($subcategory['name']);
         }
-
         echo json_encode($options);
     }
 

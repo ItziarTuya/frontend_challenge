@@ -7,8 +7,7 @@ class Errors extends Controller {
     }
 
     function index() {
-        require 'Views/error/head.php';
-        $this->view->render('error/error_404', true);
+        $this->view->render('error/error_404');
     }
 
 }

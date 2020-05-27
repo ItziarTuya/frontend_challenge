@@ -9,8 +9,8 @@
 	<link href="https://es.habcdn.com/static/root/favicon-32x32.png" rel="icon" type="image/x-icon" sizes="32x32" />
 
 	<!-- STYLES -->
-	<link rel="stylesheet" type="text/css" href="../assets/css/budget.css"/>
-	<link rel="stylesheet" type="text/css" href="../assets/css/form.css"/>
+	<link rel="stylesheet" type="text/css" href="assets/css/budget.css"/>
+	<link rel="stylesheet" type="text/css" href="assets/css/form.css"/>
 	<link
 		rel="stylesheet" 
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -30,7 +30,7 @@
 		crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         
-        <script type="text/javascript" charset="utf-8" src="../assets/js/dashboard/default.js"></script>
+        <script type="text/javascript" charset="utf-8" src="assets/js/dashboard/default.js"></script>
 	
     </head>
     <body>

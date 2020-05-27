@@ -4,7 +4,7 @@
         <ul>
             <li class="logo"><a href="https://www.habitissimo.es" target="_blank"><img height="30" title="Habitissimo - Reformas y Servicios para el Hogar"
                                                                                        alt="Visit habitissimo.es official website!"
-                                                                                       src="../assets/images/web-logo.2x.png"/></a>
+                                                                                       src="assets/images/web-logo.2x.png"/></a>
             </li>
             <li class="menu-toggle">
                 <button onclick="toggleMenu();">&#9776;</button>
