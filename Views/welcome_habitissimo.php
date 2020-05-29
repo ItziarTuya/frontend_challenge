@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="assets/css/intro.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/welcome.css" />
 
 </head>
 <body>
@@ -10,7 +10,7 @@
                     <button type="submit" id="init" class="btn btn-info" data-toggle="button"
                             aria-pressed="false" autocomplete="off">Comenzar</button>
 
-                    <script type="text/javascript" src="assets/js/intro.js" ></script>
+                    <script type="text/javascript" src="<?php echo URL; ?>assets/js/welcome/default.js" ></script>
                 </div>
             </div>
         </div>

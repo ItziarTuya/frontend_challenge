@@ -1,6 +1,7 @@
 $(function () {
 
     var url = 'http://localhost/habitissimo/';
+    var description = '';
     var category = '';
     var subcategory = '';
     var rate = '';
@@ -97,13 +98,13 @@ $(function () {
         category = $('#category').val();
         subcategory = $('#subcategory').val();
         rate = $('#rate').val();
-        
+
         $.ajax({
             type: 'POST',
             data: {
                 category: category,
-                subcategory : subcategory,
-                rate : rate
+                subcategory: subcategory,
+                rate: rate
             },
             url: url + 'dashboard/backToStep1',
             success: function (response) {
@@ -140,7 +141,8 @@ $(function () {
             url: url + 'dashboard/loadDataView',
             success: function (response) {
                 $('.budget').empty().html(response);
-                if ($('input').lengh) toggleInputError();
+                if ($('input').lengh)
+                    toggleInputError();
             },
             error: function () {
                 alert('Something went wrong!');
@@ -172,17 +174,17 @@ $(function () {
             }
         });
     });
-    
+
     // Data error handler
-    function toggleInputError(){
-        $(document).on('focusout', 'input', function(){
-            id_name = '#'+$(this).prop('id');
-            class_name = '.'+$(this).prop('id');
+    function toggleInputError() {
+        $(document).on('focusout', 'input', function () {
+            id_name = '#' + $(this).prop('id');
+            class_name = '.' + $(this).prop('id');
             input_val = $(id_name).val();
-            if ( input_val === ''){
-                showError(class_name+'-error', id_name);
-            }else{
-                hideError(class_name+'-error', id_name);
+            if (input_val === '') {
+                showError(class_name + '-error', id_name);
+            } else {
+                hideError(class_name + '-error', id_name);
             }
         });
     }
@@ -212,6 +214,8 @@ $(function () {
                     $('.budget').empty().html(response);
                     if ($('.email-error').text())
                         $('#email').css('border', '1px solid red');
+                    
+                    createRequestAPI();
                 },
                 error: function () {
                     alert('Something went wrong!');
@@ -219,9 +223,7 @@ $(function () {
             });
         }
     });
-    
 
-    
     function showError(p, element, error = 'Completa este campo') {
         $(p).empty().append(error).css({'color': 'red', 'font-style': 'italic'});
         $(element).css('border', '1px solid red');
@@ -232,8 +234,27 @@ $(function () {
         $(element).css('border', '');
     }
 
-    function dataParams() {
-        
+    function createRequestAPI() {
+        var data = {
+                    "title" : "Itziar",
+                    "description" : "instalación de aire acondicionado",
+                    "category" : "installations",
+                    "email" : "itziartuya@gmail.com",
+                    "phone" : "660685863",
+                    "address" : "flower street"
+                };
+                
+        $.ajax({
+            type : 'POST',
+            data : JSON.stringify(data),
+            dataType: 'json',
+            url : 'http://localhost/habitissimo_api/budget/create', 
+            success: function(response, status){
+                console.log(response);
+                console.log(status);
+                alert(status);
+            }
+        });
     }
 
 });
