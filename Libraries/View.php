@@ -24,7 +24,7 @@ class View {
         if ($step == true) {
             require 'Views/dashboard/' . $step . '.php';
         }
-
+        
         require 'Views/dashboard/further.php';
         require 'Views/dashboard/footer.php';
     }

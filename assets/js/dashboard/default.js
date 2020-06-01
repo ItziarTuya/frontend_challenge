@@ -213,9 +213,10 @@ $(function () {
                 success: function (response) {
                     $('.budget').empty().html(response);
                     if ($('.email-error').text())
-                        $('#email').css('border', '1px solid red');
-                    
-                    createRequestAPI();
+                        $('#email').css('border', '1px solid #FF7300');
+                    else{
+                        createRequestAPI();
+                    }    
                 },
                 error: function () {
                     alert('Something went wrong!');
@@ -225,8 +226,8 @@ $(function () {
     });
 
     function showError(p, element, error = 'Completa este campo') {
-        $(p).empty().append(error).css({'color': 'red', 'font-style': 'italic'});
-        $(element).css('border', '1px solid red');
+        $(p).empty().append(error).css({'color': '#FF7300', 'font-style': 'italic'});
+        $(element).css('border', '1px solid #FF7300');
     }
 
     function hideError(p, element) {
@@ -236,12 +237,12 @@ $(function () {
 
     function createRequestAPI() {
         var data = {
-                    "title" : "Itziar",
-                    "description" : "instalación de aire acondicionado",
-                    "category" : "installations",
-                    "email" : "itziartuya@gmail.com",
-                    "phone" : "660685863",
-                    "address" : "flower street"
+                    "title" : name,
+                    "description" : description,
+                    "category" : category,
+                    "email" : email,
+                    "phone" : phone,
+                    "address" : ""
                 };
                 
         $.ajax({
@@ -256,6 +257,8 @@ $(function () {
             }
         });
     }
+
+
 
 });
 

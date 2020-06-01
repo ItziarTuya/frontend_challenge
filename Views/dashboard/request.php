@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="subcategories">Subcategoría</label>
+                        <label for="time">Fecha estimada del trabajo</label>
                         <?php (isset($this->time)) ? $time = $this->time : $time = 0; ?>
                         <select class="form-control" id="time">
                             <option <?php if ($time == 1) echo 'selected'; ?> value="1"> Lo antes posible </option>

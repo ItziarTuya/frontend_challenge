@@ -36,10 +36,8 @@
                         <label for="email">E-mail</label>
                         <input type="text" id="email" class="form-control" placeholder="Introduzca su e-mail" required
                                <?php if (isset($this->email)) echo trim($this->email); ?> />
-                        <p class="email-error font-italic text-danger"><?php if (isset($this->error)) echo $this->error; ?></p>
+                        <p class="email-error font-italic text-habitissimo"><?php if (isset($this->error)) echo $this->error; ?></p>
                     </div>
-
-                    
 
                     <div class="form-group">
                         <label for="phone">Teléfono</label>

@@ -1,11 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css?family=Numans');
-
-
-.card {
-    width: 30rem;
-}
-
 .card-header {
     font-size: 1.5rem;
     font-weight: 400;
@@ -16,7 +9,7 @@
 }
 
 
-.card-body .btn[value="Continuar"] {
+.card-body .btn[value="Continuar"] , .btn[value="Finalizar"] {
     color: white;
     background-color: #FF7300;
     width: 100px;
@@ -32,6 +25,11 @@
 }
 
 .bg-habitissimo{
-    background-color: #de6501 !important;
+    background-color: #ff7300 !important;
 }
+
+.text-habitissimo{
+    color: #FF7300;
+}
+
 

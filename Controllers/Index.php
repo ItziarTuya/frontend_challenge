@@ -7,6 +7,10 @@ class Index extends Controller {
     }
 
     function index() {
+        $this->view->status = 'Comenzar';
+        if (isset($_SESSION)){
+            $this->view->status = 'Continuar';
+        }
         $this->view->render('welcome_habitissimo');
     }
 

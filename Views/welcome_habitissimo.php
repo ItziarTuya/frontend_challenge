@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/welcome.css" />
+<link rel="stylesheet" type="text/css" href="<?= URL; ?>assets/css/welcome.css" />
 
 </head>
 <body>
@@ -8,9 +8,9 @@
                 <h4>Encuentra profesionales de confianza.</h4>
                 <div class="col text-center pt-3">
                     <button type="submit" id="init" class="btn btn-info" data-toggle="button"
-                            aria-pressed="false" autocomplete="off">Comenzar</button>
+                            aria-pressed="false" autocomplete="off"><?= $this->status ?></button>
 
-                    <script type="text/javascript" src="<?php echo URL; ?>assets/js/welcome/default.js" ></script>
+                    <script type="text/javascript" src="<?= URL; ?>assets/js/welcome/default.js" ></script>
                 </div>
             </div>
         </div>
