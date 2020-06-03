@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?= URL; ?>assets/css/welcome.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/welcome.css" />
 
 </head>
 <body>
@@ -10,7 +10,7 @@
                     <button type="submit" id="init" class="btn btn-info" data-toggle="button"
                             aria-pressed="false" autocomplete="off"><?= $this->status ?></button>
 
-                    <script type="text/javascript" src="<?= URL; ?>assets/js/welcome/default.js" ></script>
+                    <script type="text/javascript" src="assets/js/welcome/default.js" ></script>
                 </div>
             </div>
         </div>

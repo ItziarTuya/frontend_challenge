@@ -28,7 +28,9 @@ class Dashboard extends Controller {
         $this->setSessionDetails();
 
         //prepare data view
-        $this->getSessionData();
+        if ( (Session::get('name')) !== null ){
+            $this->getSessionData();
+        }
         $this->view->render('dashboard/data', true);
     }
 
@@ -85,37 +87,4 @@ class Dashboard extends Controller {
         $this->view->email = 'value="' . Session::get('email') . '"';
         $this->view->phone = 'value="' . Session::get('phone') . '"';
     }
-
-//    function createRequest() {
-//
-//        $url = 'http://localhost/habitissimo_api/budget/create.php';
-//        $data = array(
-//            'title' => Session::get('name'),
-//            'description' => Session::get('description'),
-//            'category' => Session::get('category'),
-//            'email' => Session::get('email'),
-//            'phone' => Session::get('phone'),
-//            'address' => Session::get('subcategory'),
-//        );
-//
-//        $params = array(
-//            'http' => array(
-//                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-//                'method' => 'POST',
-//                'content' => $data,
-//            ),
-//        );
-//
-//        $ctx = stream_context_create($params);
-//        $fp = @fopen($url, 'rb', false, $ctx);
-//        if (!$fp) {
-//            throw new Exception("Problem with $url");
-//        }
-//        $response = @stream_get_contents($fp);
-//        if ($response === false) {
-//            throw new Exception("Problem reading data from $url");
-//        }
-//        var_dump( $response );
-//    }
-
 }

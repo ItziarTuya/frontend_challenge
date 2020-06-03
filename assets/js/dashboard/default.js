@@ -141,7 +141,7 @@ $(function () {
             url: url + 'dashboard/loadDataView',
             success: function (response) {
                 $('.budget').empty().html(response);
-                if ($('input').lengh)
+                if ($('input').length)
                     toggleInputError();
             },
             error: function () {

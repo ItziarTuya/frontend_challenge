@@ -1,10 +1,10 @@
-<link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/css/error.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/error.css" />
 
 </head>
 <body>
     <div class="wrap">
 
-        <img src="<?php echo URL; ?>assets/images/404-habitissimo.jpg" />
+        <img src="assets/images/404-habitissimo.jpg" />
         <h1>404 - Archivo no encontrado</h1>
 
         <p>

@@ -1,3 +1,4 @@
 <?php
 
-define('URL', 'http://localhost/habitissimo/');
+define('URL', '');
+//define('URL', 'http://localhost/habitissimo/');
